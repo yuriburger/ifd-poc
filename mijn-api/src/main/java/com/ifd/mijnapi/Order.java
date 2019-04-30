@@ -3,14 +3,14 @@ package com.ifd.mijnapi;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class Hond {
+public class Order {
 
-    public Hond() {}
+    public Order() {}
 
-    public Hond(Integer id, String naam, String reason, String status) {
+    public Order(Integer id, Integer numberOfItems, String reason, String status) {
         super();
         this.id = id;
-        this.name = naam;
+        this.numberOfItems = numberOfItems;
         this.reason = reason;
         this.status = status;
     }
@@ -25,14 +25,24 @@ public class Hond {
         this.id = id;
     }
 
-    private String name;
+    private Integer numberOfItems;
 
-    public String getName() {
-        return name;
+    public Integer getNumberOfItems() {
+        return numberOfItems;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNumberOfItems(Integer numberOfItems) {
+        this.numberOfItems = numberOfItems;
+    }
+
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     private String reason;
@@ -45,19 +55,12 @@ public class Hond {
         this.reason = reason;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    private String status;
-
     @Override
     public String toString() {
-        return "Hond [id=" + id + ", name=" + name +", reason=" + reason + ", status=" + status + "]";
+        return "Order [id=" + id +
+                "# items=" + numberOfItems +
+                "status=" + status +
+                "reason=" + reason +"]";
     }
 
     public String toJSON() throws JsonProcessingException {

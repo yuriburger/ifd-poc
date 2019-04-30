@@ -7,7 +7,7 @@ import { Taak } from './taak';
   providedIn: 'root'
 })
 export class WerkbakjeService {
-  apiURL = 'http://localhost:8080';
+  apiURL = 'http://localhost:8082';
 
   httpOptions = {
     headers: new HttpHeaders({

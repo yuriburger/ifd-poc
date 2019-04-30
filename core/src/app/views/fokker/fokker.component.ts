@@ -19,7 +19,7 @@ export class FokkerComponent implements OnInit {
   loadImports() {
     this.fokkerService.getImports().subscribe(response => {
       this.imports = response.map(item => {
-        return new Import(item.id, item.name, item.reason);
+        return new Import(item.id, item.name, item.reason, item.status);
       });
     });
   }
@@ -28,7 +28,9 @@ export class FokkerComponent implements OnInit {
     this.fokkerService
       .newImportHond(this.hondName)
       .subscribe(hond =>
-        this.imports.push(new Import(hond['id'], hond['name'], hond['reason']))
+        this.imports.push(
+          new Import(hond['id'], hond['name'], hond['reason'], hond['status'])
+        )
       );
     this.hondName = '';
   }

@@ -14,12 +14,12 @@ export class WerkbakjeComponent implements OnInit {
 
   ngOnInit() {
     this.loadTaken();
-    this.loadMijnTaken();
   }
 
   loadTaken() {
     this.werkbakjeService.getTaken().subscribe(response => {
       this.taken = response['data'];
+      this.loadMijnTaken();
     });
   }
 
@@ -32,14 +32,12 @@ export class WerkbakjeComponent implements OnInit {
   onAssign(id: String) {
     this.werkbakjeService.assignTask(id).subscribe(response => {
       this.loadTaken();
-      this.loadMijnTaken();
     });
   }
 
   onComplete(id: String) {
     this.werkbakjeService.completeTask(id).subscribe(response => {
       this.loadTaken();
-      this.loadMijnTaken();
     });
   }
 }

@@ -5,39 +5,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping(path = "/import")
-public class ImportController {
+@RequestMapping(path = "/orders")
+public class OrderController {
 
     @Autowired
-    private HondRepo hondRepo;
+    private OrderRepo orderRepo;
 
     @GetMapping(path="", produces = "application/json")
-    public ResponseEntity<Object> getHonden()
+    public ResponseEntity<Object> getOrders()
     {
         List<JSONObject> entities = new ArrayList<>();
-        for (Hond hond : hondRepo.getAllHonden().getHondList()) {
-            entities.add(new JSONObject(hond));
+        for (Order order : orderRepo.getAllOrders().getOrderList()) {
+            entities.add(new JSONObject(order));
         }
 
         return new ResponseEntity<>(entities.toString(), HttpStatus.OK);
     }
 
-
     @PostMapping(path= "", consumes = "application/json")
-    public ResponseEntity<Object> addImportHond(@RequestBody Hond hond)
+    public ResponseEntity<Object> addOrder(@RequestBody Order order)
     {
-        Integer id = hondRepo.getAllHonden().getHondList().size() + 1;
-        hond.setId(id);
-        hond.setReason("NewImport");
-        hond.setStatus("Import in behandeling");
+        Integer id = orderRepo.getAllOrders().getOrderList().size() + 1;
+        order.setReason("NewOrderStart");
+        order.setStatus("Opdracht klaargezet");
+        order.setId(id);
 
-        hondRepo.addHond(hond);
+        orderRepo.addOrder(order);
 
-        return new ResponseEntity<>(hond, HttpStatus.OK);
+        return new ResponseEntity<>(order, HttpStatus.OK);
     }
 }

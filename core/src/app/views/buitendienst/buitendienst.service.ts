@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Import } from './import';
+import { Order } from './order';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FokkerService {
+export class BuitendienstService {
   apiURL = 'http://localhost:8082';
 
   httpOptions = {
@@ -17,11 +17,13 @@ export class FokkerService {
 
   constructor(private http: HttpClient) {}
 
-  getImports(): Observable<Import[]> {
-    return this.http.get<Import[]>(`${this.apiURL}/import`);
+  getOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.apiURL}/orders`);
   }
 
-  newImportHond(name: string): Observable<Object> {
-    return this.http.post(`${this.apiURL}/import`, { name: name });
+  newOrder(numberOfItems: number): Observable<Object> {
+    return this.http.post(`${this.apiURL}/orders`, {
+      numberOfItems: numberOfItems
+    });
   }
 }
